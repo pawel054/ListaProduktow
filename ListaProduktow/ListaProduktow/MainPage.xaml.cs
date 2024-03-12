@@ -13,9 +13,20 @@ namespace ListaProduktow
     {
         private Product wybranyProdukt;
         public ObservableCollection<Product> produkty = new ObservableCollection<Product>();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateList();
+        }
+        public void UpdateList()
+        {
+            lista.ItemsSource = null;
+            lista.ItemsSource = produkty;
+        }
         public MainPage()
         {
             InitializeComponent();
+            OnAppearing();
         }
 
         public void Dodaj_Clicked(object sender, EventArgs e)
@@ -28,6 +39,21 @@ namespace ListaProduktow
             {
                 wybranyProdukt = (Product)lista.SelectedItem;
                 Navigation.PushAsync(new ManageProduct(wybranyProdukt));
+                wybranyProdukt = null;
+            }
+            else
+            {
+                DisplayAlert("Błąd", "Nie wybrano elementu", "OK");
+            }
+        }
+
+        public void Usun_Clicked(object sender, EventArgs e)
+        {
+            if (lista.SelectedItem != null)
+            {
+                wybranyProdukt = (Product)lista.SelectedItem;
+                produkty.Remove(wybranyProdukt);
+                UpdateList();
                 wybranyProdukt = null;
             }
             else
