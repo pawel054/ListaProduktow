@@ -21,6 +21,26 @@
                 <Label Text="Ilość" FontSize="17" TextColor="White" Grid.Column="2" HorizontalTextAlignment="Center"/>
             </Grid>
         </StackLayout>
+        <StackLayout>
+            <ListView x:Name="lista" ItemsSource="{Binding Produkt}" SeparatorColor="Black">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Nazwa}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0"/>
+                                <Label Text="{Binding Cena, StringFormat='{0:}zł'}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1"/>
+                                <Label Text="{Binding Ilosc}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
