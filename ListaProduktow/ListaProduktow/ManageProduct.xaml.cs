@@ -40,7 +40,7 @@ namespace ListaProduktow
             {
                 if (int.TryParse(entryIlosc.Text, out int _) && decimal.TryParse(entryCena.Text, out decimal _))
                 {
-                    var produkt = new Product(entryNazwa.Text, decimal.Parse(entryCena.Text), int.Parse(entryIlosc.Text));
+                    var produkt = new Product(Guid.NewGuid().ToString() ,entryNazwa.Text, decimal.Parse(entryCena.Text), int.Parse(entryIlosc.Text));
                     WriteToFile(produkt);
                     Navigation.PopAsync();
                 }
@@ -80,7 +80,7 @@ namespace ListaProduktow
         private static void WriteToFile(Product produkt)
         {
             List<string> outputFile = new List<string>();
-            string line = $"{produkt.Name};{produkt.Price};{produkt.Count}";
+            string line = $"{produkt.ID};{produkt.Name};{produkt.Price};{produkt.Count}";
             outputFile.Add(line);
             File.WriteAllLines(FileClass.GetFilePath(), outputFile);
         }

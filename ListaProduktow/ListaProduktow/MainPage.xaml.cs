@@ -22,7 +22,7 @@ namespace ListaProduktow
         public void UpdateList()
         {
             lista.ItemsSource = null;
-            lista.ItemsSource = produkty;
+            lista.ItemsSource = FileClass.ReadData();
         }
         public MainPage()
         {
@@ -53,7 +53,7 @@ namespace ListaProduktow
             if (lista.SelectedItem != null)
             {
                 wybranyProdukt = (Product)lista.SelectedItem;
-                produkty.Remove(wybranyProdukt);
+                FileClass.DeleteFromFile(wybranyProdukt);
                 UpdateList();
                 wybranyProdukt = null;
             }
@@ -63,34 +63,5 @@ namespace ListaProduktow
             }
         }
 
-        public static ObservableCollection<Product> ReadData()
-        {
-            if (File.Exists(FileClass.GetFilePath()))
-            {
-                List<string> lines = File.ReadAllLines(FileClass.GetFilePath()).ToList();
-                ObservableCollection<Product> products = new ObservableCollection<Product>();
-
-                foreach(var line in lines)
-                {
-                    string[] entries = line.Split(';');
-
-                    if(entries.Length == 3)
-                    {
-                        Product product = new Product();
-                        product.Name = entries[0];
-                        product.Price = decimal.Parse(entries[1]);
-                        product.Count = int.Parse(entries[2]);
-
-                        products.Add(product);
-
-                    }
-                }
-                return products;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }
