@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ListaProduktow.ManageProduct">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="Center">
+            <Label x:Name="labelTytul" Text="Dodaj produkt" TextColor="Black" FontSize="30" HorizontalOptions="Center" Margin="0,30,0,40"/>
+            <Entry x:Name="entryNazwa" Placeholder="Nazwa" WidthRequest="250" VerticalTextAlignment="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+            <Entry x:Name="entryCena" Placeholder="Cena" WidthRequest="250" VerticalTextAlignment="Center" HorizontalOptions="Center" Margin="0,0,0,20"/>
+            <Entry x:Name="entryIlosc" Placeholder="Ilosc" WidthRequest="250" VerticalTextAlignment="Center" HorizontalOptions="Center" Margin="0,0,0,50"/>
+            <Button x:Name="btnDodaj" Text="Dodaj" WidthRequest="250" BackgroundColor="Green" TextColor="White" CornerRadius="15" Clicked="BtnDodajClicked"/>
+            <Button x:Name="btnEdytuj" Text="Edytuj" WidthRequest="250" BackgroundColor="Blue" TextColor="White" CornerRadius="15" IsVisible="False" Clicked="BtnEdytujClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
