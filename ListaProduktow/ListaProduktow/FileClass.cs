@@ -78,5 +78,34 @@ namespace ListaProduktow
 
             }
         }
+
+        public static void EditFromFile(Product product)
+        {
+            if (File.Exists(FileClass.GetFilePath()))
+            {
+                List<string> lines = File.ReadAllLines(FileClass.GetFilePath()).ToList();
+                File.WriteAllText(FileClass.GetFilePath(), string.Empty);
+
+                foreach (var line in lines)
+                {
+                    if (!line.StartsWith(product.ID))
+                    {
+                        Product products = new Product();
+                        string[] entries = line.Split(';');
+                        products.ID = entries[0];
+                        products.Name = entries[1];
+                        products.Price = decimal.Parse(entries[2]);
+                        products.Count = int.Parse(entries[3]);
+                        WriteToFile(products);
+                    }
+                    else
+                    {
+                        Product products = new Product(product.ID, product.Name, product.Price, product.Count);
+                        WriteToFile(products);
+                    }
+                }
+
+            }
+        }
     }
 }

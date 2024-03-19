@@ -64,6 +64,7 @@ namespace ListaProduktow
                     wybranyProdukt.Name = entryNazwa.Text;
                     wybranyProdukt.Price = decimal.Parse(entryCena.Text);
                     wybranyProdukt.Count = int.Parse(entryIlosc.Text);
+                    FileClass.EditFromFile(wybranyProdukt);
                     Navigation.PopAsync();
                 }
                 else
