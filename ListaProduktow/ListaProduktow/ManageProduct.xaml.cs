@@ -79,10 +79,11 @@ namespace ListaProduktow
 
         private static void WriteToFile(Product produkt)
         {
-            List<string> outputFile = new List<string>();
             string line = $"{produkt.ID};{produkt.Name};{produkt.Price};{produkt.Count}";
-            outputFile.Add(line);
-            File.WriteAllLines(FileClass.GetFilePath(), outputFile);
+            using(StreamWriter writer = new StreamWriter(FileClass.GetFilePath(), true))
+            {
+                writer.WriteLine(line);
+            }
         }
     }
 }
